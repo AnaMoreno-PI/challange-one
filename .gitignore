@@ -1,0 +1,66 @@
+# Entornos virtuales
+venv/
+.env/
+.venv/
+ENV/
+env/
+*.pyc
+__pycache__/
+
+# Archivos de configuración de Python
+*.py[cod]
+*.pyo
+*.pyd
+
+# Archivos de caché y logs
+*.log
+*.pot
+*.mo
+*.cache
+*.coverage
+*.egg-info/
+*.eggs/
+*.manifest
+*.spec
+
+# Archivos generados por el compilador y otros binarios
+*.o
+*.so
+*.a
+*.dll
+*.dylib
+*.lib
+*.out
+
+# Archivos de bases de datos
+*.sqlite3
+*.db
+
+# Configuración específica del IDE o editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Archivos de distribución
+dist/
+build/
+*.egg
+
+# Directorios o archivos ocultos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de Docker y contenedores
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Configuración de FastAPI/Flask para entornos locales
+instance/
+config.py
+
+# Archivos de configuración del entorno (si los usas)
+.envrc
+.env.local
+.env.development
+.env.production
