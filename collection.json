@@ -53,6 +53,34 @@
             }
         },
         {
+            "name": "Google Login",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://127.0.0.1:8000/auth/google/login",
+                    "protocol": "http",
+                    "host": ["127.0.0.1"],
+                    "port": "8000",
+                    "path": ["auth", "google", "login"]
+                }
+            }
+        },
+        {
+            "name": "Google Callback",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://127.0.0.1:8000/auth/google/callback",
+                    "protocol": "http",
+                    "host": ["127.0.0.1"],
+                    "port": "8000",
+                    "path": ["auth", "google", "callback"]
+                }
+            }
+        },
+        {
             "name": "Get All Characters",
             "request": {
                 "method": "GET",

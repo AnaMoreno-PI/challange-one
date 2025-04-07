@@ -1,32 +1,42 @@
 from sqlalchemy.orm import Session
-from schemas.item_schemas import ItemCreate
 from api.models.characters import Character
+from schemas.item_schemas import ItemCreate
 
-def get_characters(db: Session):
-    return db.query(Character).all()
 
-def get_character_by_name(db: Session, name: str):
-    return db.query(Character).filter(Character.name == name).first()
+class CharacterService:
+    """Servicio para manejar la lógica relacionada con personajes."""
 
-def create_character(db: Session, item: ItemCreate):
-    db_character = Character(
-        id=item.id, 
-        name=item.name,
-        height=item.height,
-        mass=item.mass,
-        hair_color=item.hair_color,
-        skin_color=item.skin_color,
-        eye_color=item.eye_color
-    )
-    db.add(db_character)
-    db.commit()
-    db.refresh(db_character)
-    return db_character
+    def __init__(self, db: Session):
+        self.db = db
 
-def delete_character(db: Session, character_id: int):
-    db_character = db.query(Character).filter(Character.id == character_id).first()
-    if db_character:
-        db.delete(db_character)
-        db.commit()
-        return True
-    return False
+    def get_all_characters(self):
+        """Obtiene todos los personajes."""
+        return self.db.query(Character).all()
+
+    def get_character_by_name(self, name: str):
+        """Obtiene un personaje por su nombre."""
+        return self.db.query(Character).filter(Character.name == name).first()
+
+    def create_character(self, item: dict):
+        """Crea un nuevo personaje."""
+        character = Character(
+            name=item["name"],
+            height=item["height"],
+            mass=item["mass"],
+            hair_color=item.get("hair_color"),
+            skin_color=item.get("skin_color"),
+            eye_color=item.get("eye_color"),
+        )
+        self.db.add(character)
+        self.db.commit()
+        self.db.refresh(character)
+        return character
+
+    def delete_character(self, character_id: int):
+        """Elimina un personaje por su ID."""
+        character = self.db.query(Character).filter(Character.id == character_id).first()
+        if character:
+            self.db.delete(character)
+            self.db.commit()
+            return True
+        return False
