@@ -6,7 +6,8 @@ ENV/
 env/
 *.pyc
 __pycache__/
-
+# Archivos de configuración de entornos virtuales
+*.env
 # Archivos de configuración de Python
 *.py[cod]
 *.pyo

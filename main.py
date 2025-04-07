@@ -1,9 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from api.router import router as api_router
 from config import init_db
-from config.db_config import SessionLocal
-from config.db_config import engine
-import os
+from config.db_config import SessionLocal, engine
+from services.services import CharacterService, AzureCognitiveService
 
 
 app = FastAPI()
@@ -21,6 +20,15 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# Inicializar servicios
+def get_character_service(db=Depends(get_db)):
+    return CharacterService(db)
+
+def get_azure_cognitive_service():
+    # Aquí se pueden pasar las credenciales necesarias para el servicio
+    azure_credentials = {"key": "your_key", "endpoint": "your_endpoint"}
+    return AzureCognitiveService(azure_credentials)
 
 # Incluir rutas
 app.include_router(api_router)
