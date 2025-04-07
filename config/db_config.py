@@ -8,6 +8,9 @@ from dotenv import load_dotenv
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
 
+if os.getenv('ENVIRONMENT') != 'PRODUCTION':
+    load_dotenv()
+
 # Obtener las credenciales de la base de datos desde las variables de entorno
 DB_SERVER = os.getenv('DB_SERVER')
 DB_PORT = os.getenv('DB_PORT')
@@ -47,3 +50,5 @@ def get_db():
         yield db
     finally:
         db.close()
+
+SECRET_KEY = os.getenv("SECRET_KEY", "default_secret_key")  # Usa un valor por defecto solo para desarrollo

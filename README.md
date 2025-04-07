@@ -61,3 +61,43 @@ app/
 │   └── item_service.py
 ├── main.py
 └── .env
+
+## CI/CD Pipeline
+
+Este proyecto utiliza GitHub Actions para implementar un flujo de trabajo de CI/CD que automatiza las pruebas y el despliegue en una Azure Web App.
+
+### Configuración del CI/CD
+
+1. **Configuración de GitHub Actions**:
+   - El archivo de flujo de trabajo se encuentra en `.github/workflows/ci-cd.yml`.
+   - Ejecuta pruebas automáticamente y despliega la aplicación en Azure Web App al realizar un push o pull request en la rama `main`.
+
+2. **Configuración de Azure Web App**:
+   - Crea una Azure Web App con el runtime **Python 3.11**.
+   - Descarga el perfil de publicación y configúralo como un secreto en GitHub (`AZURE_WEBAPP_PUBLISH_PROFILE`).
+
+3. **Despliegue Automático**:
+   - Los cambios en la rama `main` activan el flujo de trabajo de GitHub Actions.
+   - La aplicación se despliega automáticamente en la Azure Web App configurada.
+
+### Monitoreo y Gestión
+
+- Utiliza el portal de Azure para monitorear el estado de la Web App.
+- Los logs de GitHub Actions están disponibles en la pestaña **Actions** del repositorio.
+
+### Mejoras Continuas
+
+- Optimiza el flujo de trabajo de CI/CD ajustando los pasos según las necesidades del proyecto.
+- Implementa pruebas adicionales para garantizar la calidad del código.
+
+## Nuevas funcionalidades
+
+### Registro y Login de Usuarios
+
+- **POST /auth/register**: Registra un nuevo usuario.
+- **POST /auth/login**: Autentica un usuario y devuelve un JWT.
+
+### Requisitos de acceso
+
+- **Rutas GET**: Requieren un JWT válido.
+- **Rutas POST/PUT**: Requieren un JWT válido y que el usuario sea de tipo `Admin`.
