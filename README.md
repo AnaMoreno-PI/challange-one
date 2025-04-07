@@ -235,3 +235,27 @@ Para facilitar las pruebas de la API, se incluye una colección de Postman en el
      uvicorn main:app --reload
      ```
    - Si estás probando la autenticación con Google, asegúrate de haber configurado correctamente las credenciales en el archivo `.env`.
+
+## Seguridad
+
+Este proyecto incluye medidas de seguridad para proteger la aplicación contra ataques comunes:
+
+### Encabezados de seguridad
+Se han configurado los siguientes encabezados de seguridad utilizando la biblioteca `secure`:
+- **Content-Security-Policy (CSP)**: Restringe las fuentes de contenido permitidas.
+- **X-Frame-Options**: Previene ataques de clickjacking.
+- **Strict-Transport-Security (HSTS)**: Fuerza el uso de HTTPS.
+- **X-Content-Type-Options**: Previene la interpretación errónea de tipos MIME.
+- **Referrer-Policy**: Controla la información enviada en el encabezado Referer.
+
+### Rate Limiting
+Se ha implementado rate limiting utilizando la biblioteca `slowapi` para prevenir ataques de fuerza bruta:
+- **Rutas protegidas**:
+  - `/characters`: Máximo 5 solicitudes por minuto.
+  - `/auth/login`: Máximo 3 intentos de inicio de sesión por minuto.
+
+### Cómo probar
+1. **Encabezados de seguridad**:
+   - Despliega la aplicación y verifica los encabezados en [https://securityheaders.com/](https://securityheaders.com/).
+2. **Rate limiting**:
+   - Realiza múltiples solicitudes a las rutas protegidas para verificar que se limite el acceso después de alcanzar el límite configurado.
