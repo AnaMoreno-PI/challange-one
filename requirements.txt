@@ -14,5 +14,5 @@ pyasn1-modules==0.2.8
 google-auth-oauthlib==1.2.1
 jinja2==3.1.2
 python-multipart==0.0.6
-secure==0.4.0
+secure==1.0.1
 slowapi==0.1.7
