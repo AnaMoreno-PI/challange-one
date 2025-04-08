@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Depends, Request, Form
 from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
@@ -14,7 +15,8 @@ from slowapi.middleware import SlowAPIMiddleware
 app = FastAPI()
 
 # Configurar plantillas
-templates = Jinja2Templates(directory="e:/PI/Challange/Etapa 6/app/templates")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
 @app.middleware("http")
 async def set_secure_headers(request: Request, call_next):
